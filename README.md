@@ -3,8 +3,6 @@ create table modeadministration(
     id int not null primary key AUTO_INCREMENT,
     descriptionmode varchar(60) not null
 );
-
-drop table modeadiministration;
 create table activeprinciple(
     idap int not null primary key AUTO_INCREMENT,
     nameap varchar(60) not null

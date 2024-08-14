@@ -39,17 +39,20 @@ public class ModeAdministrationController {
                     break;
                 case 2:
                     searchModeAdministration();
+                    break;
                 case 3:
                     amendModeAdministration();
+                    break;
                 case 4:
                     removeModeAdministration();
+                    break;
                 case 5:
                     break;
                 default:
                 JOptionPane.showMessageDialog(null, "Error opcion invalida", "Error", JOptionPane.ERROR_MESSAGE);
                     break;
             }
-        } while(op!=3);
+        } while(op!=5);
     }
 
     public void addModeAdministration() {
@@ -94,8 +97,8 @@ public class ModeAdministrationController {
                 updateModeAdministrationUseCase.execute(id, description).ifPresentOrElse(updatedMode -> {
                     JOptionPane.showMessageDialog(null, updatedMode.toString());
                 }, () -> {
-                });;
-            } catch (Exception e) {
+                });
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Properties;
 
+import javax.swing.JOptionPane;
 
 import com.pharmacy.modeadministration.domain.entity.ModeAdministration;
 import com.pharmacy.modeadministration.domain.service.ModeAdministrationService;
@@ -41,7 +42,6 @@ public class ModeAdministrationRepository implements ModeAdministrationService{
                     modeAdministration.setId(generatedKeys.getLong(1));
                 }
             }
-            connection.close();
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -62,7 +62,6 @@ public class ModeAdministrationRepository implements ModeAdministrationService{
                     return Optional.of(modeAdministration);
                 }
             }
-            connection.close();
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -75,11 +74,15 @@ public class ModeAdministrationRepository implements ModeAdministrationService{
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(2, id);
             statement.setString(1, value);
-            statement.executeUpdate();
+            int rows = statement.executeUpdate();
             
-            ModeAdministration modeAdministration = new ModeAdministration(id, value);
-            connection.close();
-            return Optional.of(modeAdministration);
+            if (rows > 0) {
+                ModeAdministration modeAdministration = new ModeAdministration(id, value);
+                return Optional.of(modeAdministration);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error in update");
+                return Optional.empty();
+            }
         } catch(SQLException e) {
             e.printStackTrace();
             return Optional.empty();
@@ -92,8 +95,6 @@ public class ModeAdministrationRepository implements ModeAdministrationService{
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             statement.executeUpdate();
-
-            connection.close();
         } catch(SQLException e) {
             e.printStackTrace();
         }

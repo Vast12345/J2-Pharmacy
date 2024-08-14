@@ -26,6 +26,7 @@ public class ModeAdministration {
         this.descriptionmode = descriptionmode;
     }
 
+    @Override
     public String toString() {
         String data = MessageFormat.format("Id: {0}\nName: {1}", this.id, this.descriptionmode);
         return data;
