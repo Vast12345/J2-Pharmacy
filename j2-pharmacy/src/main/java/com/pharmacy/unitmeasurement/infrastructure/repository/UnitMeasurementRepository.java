@@ -1,4 +1,4 @@
-package com.pharmacy.laboratory.infrastructure.repository;
+package com.pharmacy.unitmeasurement.infrastructure.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Properties;
 
-import com.pharmacy.laboratory.domain.entity.Laboratory;
-import com.pharmacy.laboratory.domain.service.LaboratoryService;
+import com.pharmacy.unitmeasurement.domain.entity.UnitMeasurement;
+import com.pharmacy.unitmeasurement.domain.service.UnitMeasurementService;
 
-public class LaboratoryRepository implements LaboratoryService{
+public class UnitMeasurementRepository implements UnitMeasurementService{
     private Connection connection;
 
-    public LaboratoryRepository() {
+    public UnitMeasurementRepository() {
         try {
             Properties props = new Properties();
             props.load(getClass().getClassLoader().getResourceAsStream("db.properties"));
@@ -28,16 +28,16 @@ public class LaboratoryRepository implements LaboratoryService{
     }
 
     @Override
-    public void createLaboratory(Laboratory laboratory) {
-        String sql = "Insert into laboratory (namelab, codecityreg) values (?, ?, ?)";
+    public void createUnitMeasurement(UnitMeasurement unitMeasurement) {
+        String sql = "Insert into unitmeasurement (id, nameum) values (?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            statement.setString(2, laboratory.getNameLab());
-            statement.setString(3, laboratory.getCodeCity());
+            statement.setLong(1, unitMeasurement.getIdUm());
+            statement.setString(2, unitMeasurement.getNameUm());
             statement.executeUpdate();
             try(ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if(generatedKeys.next()) {
-                    laboratory.setId(generatedKeys.getLong(1));
+                    unitMeasurement.setIdUm(generatedKeys.getLong(1));
                 }
             }
         } catch(SQLException e) {
@@ -46,19 +46,18 @@ public class LaboratoryRepository implements LaboratoryService{
     }
 
     @Override
-    public Optional<Laboratory> findLaboratory(Long id) {
-        String sql = "select * from laboratory where id = ?";
+    public Optional<UnitMeasurement> findUnitMeasurement(Long id) {
+        String sql = "select * from unitmeasurement where id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
 
             try(ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    Laboratory laboratory = new Laboratory(
-                        rs.getLong("id"),
-                        rs.getString("namelab"),
-                        rs.getString("codecityreg")
+                    UnitMeasurement unitMeasurement = new UnitMeasurement(
+                        rs.getLong("idum"),
+                        rs.getString("nameum")
                     );
-                    return Optional.of(laboratory);
+                    return Optional.of(unitMeasurement);
                 }
             }
         } catch(SQLException e) {
@@ -68,16 +67,15 @@ public class LaboratoryRepository implements LaboratoryService{
     }
 
     @Override
-    public Optional<Laboratory> updateLaboratory(Long id, String name, String code) {
-        String sql = "update laboratory set namelab = ?, codecityreg = ? where id = ?";
+    public Optional<UnitMeasurement> updateUnitMeasurement(Long id, String name) {
+        String sql = "update unitmeasurement set nameum = ? where idum = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, name);
-            statement.setString(2, code);
             statement.setLong(3, id);
             statement.executeUpdate();
             
-           Laboratory laboratory = new Laboratory (id, name, code);
-            return Optional.of(laboratory);
+           UnitMeasurement unitMeasurement = new UnitMeasurement (id, name);
+            return Optional.of(unitMeasurement);
         } catch(SQLException e) {
             e.printStackTrace();
             return Optional.empty();
@@ -85,7 +83,7 @@ public class LaboratoryRepository implements LaboratoryService{
     }
 
     @Override
-    public void deleteLaboratory(Long id) {
+    public void deleteUnitMeasurement(Long id) {
         String sql = "delete from laboratory where id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
@@ -94,6 +92,4 @@ public class LaboratoryRepository implements LaboratoryService{
             e.printStackTrace();
         }
     }
-
-    
 }

@@ -55,11 +55,9 @@ public class LaboratoryController {
     }
 
     public void addLaboratory() {
-        Long id = Long.parseLong(JOptionPane.showInputDialog(null, "Add Lab Code"));
         String name = JOptionPane.showInputDialog(null, "Add Name");
         String code = JOptionPane.showInputDialog(null, "Add City Code");
         Laboratory lab = new Laboratory();
-        lab.setId(id);
         lab.setNameLab(name);
         lab.setCodeCity(code);
         createLaboratoryUseCase.execute(lab);

@@ -8,7 +8,10 @@ import com.pharmacy.country.infrastructure.controller.CountryController;
 import com.pharmacy.customer.infrastructure.controller.CustomerController;
 import com.pharmacy.laboratory.infrastructure.controller.LaboratoryController;
 import com.pharmacy.modeadministration.infrastructure.Controller.ModeAdministrationController;
+import com.pharmacy.pharmacy.infrastructure.controller.PharmacyController;
+import com.pharmacy.pharmacymedicine.infrastructure.controller.PharmacyMedicineController;
 import com.pharmacy.region.infrastructure.controller.RegionController;
+import com.pharmacy.unitmeasurement.infrastructure.controller.UnitMeasurementController;
 
 
 
@@ -50,6 +53,18 @@ public class Main {
                         laboratoryAdapter.laboratoryMenu();
                         break;
                     case 8:
+                        UnitMeasurementController unitMeasurementAdapter = new UnitMeasurementController();
+                        unitMeasurementAdapter.unitMeasurementMenu();
+                        break;
+                    case 9:
+                        PharmacyController pharmacyAdapter = new PharmacyController();
+                        pharmacyAdapter.pharmacyMenu();
+                        break;
+                    case 10:
+                        PharmacyMedicineController pharmacyMedicineAdapter = new PharmacyMedicineController();
+                        pharmacyMedicineAdapter.pharmacyMedicineMenu();
+                        break;
+                    case 11:
                         JOptionPane.showMessageDialog(null, "Suerte no vemos.");
                         break;
                     default:
