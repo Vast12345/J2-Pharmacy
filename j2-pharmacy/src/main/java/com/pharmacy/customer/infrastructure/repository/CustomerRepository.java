@@ -1,11 +1,11 @@
 package com.pharmacy.customer.infrastructure.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -78,27 +78,26 @@ public class CustomerRepository implements CustomerService{
     }
 
     @Override
-    public Optional<Customer> updateCustomer(String id, String name, String lastName, String email, Date birthdate,
-            float lon, float latitud, String codeCityCustomer) {
-                String sql = "update customer set namecustomer = ?, lastnamecustomer = ?, emailcustomer = ?, birthdate = ?, lon = ?, latidud = ?, codecitycustomer = ? where idcustomer = ?";
-                try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                    statement.setString(1, name);
-                    statement.setString(2, lastName);
-                    statement.setString(3, email);
-                    statement.setDate(4, birthdate);
-                    statement.setFloat(5, lon);
-                    statement.setFloat(6, latitud);
-                    statement.setString(7, codeCityCustomer);
-                    statement.setString(8, id);
-                    statement.executeUpdate();
-                    
-                   Customer customer = new Customer (id, name, lastName, email, birthdate, lon, latitud, codeCityCustomer);
-                    return Optional.of(customer);
-                } catch(SQLException e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error with Database");
-                    return Optional.empty();
-                }
+    public Optional<Customer> updateCustomer(String id, String name, String lastName, String email, Date birthdate, float lon, float latitud, String codeCityCustomer) {
+        String sql = "update customer set namecustomer = ?, lastnamecustomer = ?, emailcustomer = ?, birthdate = ?, lon = ?, latidud = ?, codecitycustomer = ? where idcustomer = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, name);
+            statement.setString(2, lastName);
+            statement.setString(3, email);
+            statement.setDate(4, birthdate);
+            statement.setFloat(5, lon);
+            statement.setFloat(6, latitud);
+            statement.setString(7, codeCityCustomer);
+            statement.setString(8, id);
+            statement.executeUpdate();
+            
+            Customer customer = new Customer (id, name, lastName, email, birthdate, lon, latitud, codeCityCustomer);
+            return Optional.of(customer);
+        } catch(SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error with Database");
+            return Optional.empty();
+        }
     }
 
     @Override

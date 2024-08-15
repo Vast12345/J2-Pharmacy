@@ -1,8 +1,8 @@
 package com.pharmacy.customer.infrastructure.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.sql.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -119,7 +119,7 @@ public class CustomerController {
                     e.printStackTrace();
                 }
             } catch(DateTimeParseException e) {
-                System.out.println("Invalid Date Format");
+                JOptionPane.showMessageDialog(null, "Invalid Date Format");
             }
         }
     }
@@ -188,7 +188,7 @@ public class CustomerController {
                     e.printStackTrace();
                 }
             } catch(DateTimeParseException e) {
-                System.out.println("Invalid Date Format.");
+                JOptionPane.showMessageDialog(null, "Invalid Date Format");
             }
 
         }

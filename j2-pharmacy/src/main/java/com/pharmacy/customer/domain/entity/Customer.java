@@ -1,7 +1,7 @@
 package com.pharmacy.customer.domain.entity;
 
-import java.text.MessageFormat;
 import java.sql.Date;
+import java.text.MessageFormat;
 
 public class Customer {
     private String idCustomer;
@@ -80,7 +80,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        String data = MessageFormat.format("Id: {0}\nName: {1}\nLast Name: {2}\nEmail: {3}\nBirthdate: {4}\nLon: {5}\nLatitud: {6}\nCity Code", this.idCustomer, this.nameCustomer, this.lastNameCustomer, this.emailCustomer, this.birthdate, this.lon, this.latitud, this.codeCityCustomer);
+        String data = MessageFormat.format("Id: {0}\nName: {1}\nLast Name: {2}\nEmail: {3}\nBirthdate: {4}\nLon: {5}\nLatitud: {6}\nCity Code: {7}", this.idCustomer, this.nameCustomer, this.lastNameCustomer, this.emailCustomer, this.birthdate, this.lon, this.latitud, this.codeCityCustomer);
         return data;
     }
 

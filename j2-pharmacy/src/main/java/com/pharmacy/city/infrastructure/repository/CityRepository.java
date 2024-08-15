@@ -52,9 +52,9 @@ public class CityRepository implements CityService{
             try(ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     City city = new City(
-                        rs.getString("codereg"),
-                        rs.getString("namereg"),
-                        rs.getString("codecountry")
+                        rs.getString("codecity"),
+                        rs.getString("namecity"),
+                        rs.getString("codereg")
                     );
                     return Optional.of(city);
                 }

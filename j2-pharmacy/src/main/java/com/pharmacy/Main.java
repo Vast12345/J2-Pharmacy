@@ -6,6 +6,7 @@ import com.pharmacy.activeprinciple.infrastructure.controller.ActivePrincipleCon
 import com.pharmacy.city.infrastructure.controller.CityController;
 import com.pharmacy.country.infrastructure.controller.CountryController;
 import com.pharmacy.customer.infrastructure.controller.CustomerController;
+import com.pharmacy.laboratory.infrastructure.controller.LaboratoryController;
 import com.pharmacy.modeadministration.infrastructure.Controller.ModeAdministrationController;
 import com.pharmacy.region.infrastructure.controller.RegionController;
 
@@ -45,14 +46,18 @@ public class Main {
                         customerAdapter.customerMenu();
                         break;
                     case 7:
+                        LaboratoryController laboratoryAdapter = new LaboratoryController();
+                        laboratoryAdapter.laboratoryMenu();
+                        break;
+                    case 8:
                         JOptionPane.showMessageDialog(null, "Suerte no vemos.");
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Error opcion invalida.");
                 }
-            }  while(op!=5);
-        } catch(NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error: Input a Number");
+            }  while(op!=8);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error");
         }
     }
 }

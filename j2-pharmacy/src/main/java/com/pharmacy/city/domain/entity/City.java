@@ -1,5 +1,7 @@
 package com.pharmacy.city.domain.entity;
 
+import java.text.MessageFormat;
+
 public class City {
     private String codeCity;
     private String nameCity;
@@ -32,5 +34,11 @@ public class City {
     }
     public void setCodeReg(String codeReg) {
         this.codeReg = codeReg;
+    }
+
+    @Override
+    public String toString() {
+        String data = MessageFormat.format("Id: {0}\nName: {1}\nRegion Code: {2}", this.codeCity, this.nameCity, this.codeReg);
+        return data;
     }
 }
